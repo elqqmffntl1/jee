@@ -10,22 +10,29 @@ import javax.swing.JOptionPane;
  */
 public class MemberController {
 	public static void main(String[] args) { // String[] params
-    MemberService service = new MemberServiceImpl();
+    MemberService service = MemberServiceImpl.getInstance();
     int ok = 0;
 		
 		while (true) {
 			switch (JOptionPane.showInputDialog("1.등록2.보기3.수정4.삭제0.종료")) {
 			case "1":
-				String stu1 =JOptionPane.showInputDialog("ID,PW,이름,주민번호");
-				String[] stuArr = stu1.split(",");
-				service.registStudent(stuArr[0], stuArr[1], stuArr[2], stuArr[3]);
+				MemberBean stu = new MemberBean();
+				String input =JOptionPane.showInputDialog("ID,PW,이름,주민번호");
+				String[] inputArr = input.split(",");
+				stu.setId(inputArr[0]);
+				stu.setPw(inputArr[1]);
+				stu.setName(inputArr[2]);
+				stu.setSsn(inputArr[3]);
+				stu.setRegDate();
+				String result = service.regist(stu);
+				JOptionPane.showMessageDialog(null, result);
 				break;
 			case "2":
-				JOptionPane.showMessageDialog(null, service.showStudent());
+				JOptionPane.showMessageDialog(null, service.show());
 				break;
 			case "3":
 				String rpw = JOptionPane.showInputDialog("수정값?");
-                service.updateStudent(rpw);
+                service.update(rpw);
                 break;
 			case "4":
 				break;
