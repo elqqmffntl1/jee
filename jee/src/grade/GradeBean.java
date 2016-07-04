@@ -1,15 +1,27 @@
 package grade;
 
 public class GradeBean{
-	private int kor,eng,math;
-	private String name;
+	private int kor,eng,math,seq;
+	private String name,hakjum;
 	
+	public String getHakjum() {
+		return hakjum;
+	}
+	public void setHakjum(String hakjum) {
+		this.hakjum = hakjum;
+	}
 	public GradeBean(String name, int kor, int eng, int math) {
 		this.name = name;
 		this.kor = kor;
 		this.eng = eng;
 		this.math = math;
 	
+	}
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 	public void setKor(int kor){
 		this.kor = kor;
@@ -40,7 +52,9 @@ public class GradeBean{
 	 */
 	@Override
 	public String toString() {
-		return "채점결과 [국어=" + kor + ", 영어=" + eng + ", 수학=" + math + ", 이름=" + name + "]";
+		return "채점결과 [국어=" + kor + ", 영어=" + eng + ", 수학=" + math + ", 시퀀스=" + seq + ", 이름=" + name
+				+ ", 학점=" + hakjum + "]";
 	}
+
 	
 }
