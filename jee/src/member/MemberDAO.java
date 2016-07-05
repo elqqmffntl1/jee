@@ -41,7 +41,7 @@ public class MemberDAO {
        
        try {
 		Class.forName(Constants.ORACLE_DRIVER);
-		con = DriverManager.getConnection(Constants.ORACLE_URL,Constants.ORACLE_ID,Constants.ORACLE_PW);
+		con = DriverManager.getConnection(Constants.ORACLE_URL,Constants.USER_ID,Constants.USER_PW);
 		stmt = con.createStatement();
 		result = stmt.executeUpdate(sql);
 	} catch (Exception e) {
@@ -63,8 +63,8 @@ public class MemberDAO {
 			Class.forName(Constants.ORACLE_DRIVER);
 			con = DriverManager.getConnection(
 					Constants.ORACLE_URL,
-					Constants.ORACLE_ID,
-					Constants.ORACLE_PW);
+					Constants.USER_ID,
+					Constants.USER_PW);
 			stmt = con.createStatement();
 		    rs = stmt.executeQuery(sql);
 		    while (rs.next()) {
@@ -90,8 +90,8 @@ public class MemberDAO {
 			Class.forName(Constants.ORACLE_DRIVER);
 		con = DriverManager.getConnection(
 					Constants.ORACLE_URL,
-					Constants.ORACLE_ID,
-					Constants.ORACLE_PW);
+					Constants.USER_ID,
+					Constants.USER_PW);
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(sql);
 		if (rs.next()) {
@@ -113,7 +113,7 @@ public class MemberDAO {
 		List<MemberBean> temp = new ArrayList<MemberBean>();
 		try {
 			Class.forName(Constants.ORACLE_DRIVER);
-		con = DriverManager.getConnection(Constants.ORACLE_URL,Constants.ORACLE_ID,Constants.ORACLE_PW);
+		con = DriverManager.getConnection(Constants.ORACLE_URL,Constants.USER_ID,Constants.USER_PW);
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
@@ -139,8 +139,8 @@ public class MemberDAO {
 		Class.forName(Constants.ORACLE_DRIVER);
 	    con = DriverManager.getConnection(
 	    		Constants.ORACLE_URL,
-				Constants.ORACLE_ID,
-				Constants.ORACLE_PW);
+				Constants.USER_ID,
+				Constants.USER_PW);
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(sql);
 		if (rs.next()) {

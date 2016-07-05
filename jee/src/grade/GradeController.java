@@ -14,13 +14,28 @@ public class GradeController {
 		GradeService service = GradeServiceImpl.getInstance();
 		while (true) {
 			switch (JOptionPane.showInputDialog(""
-					+ "1추가 2수정 3삭제 4전체조회 5학점조회 6시퀀스조회 7응시생수")) {
+					+ "1추가 2수정 3삭제 4전체조회 5학점을 포함한 시험내역 조회(SEQ) 6시퀀스조회(ID) 7응시생수(시험일자별)")) {
 			case "1":
-				
+			    service.score(JOptionPane.showInputDialog("id,date,java,sql,html,js").split(","));
 				break;
-			case "2":break;
-			case "3":break;
-			case "4":break;
+			case "2":
+				GradeBean gra2 = new GradeBean();
+				String input2 =JOptionPane.showInputDialog("점수변경 자바,SQL,HTML,자바스크립트");
+				String[] inputArr2 = input2.split(",");
+				gra2.setJava(Integer.parseInt(inputArr2[0]));
+				gra2.setSql(Integer.parseInt(inputArr2[1]));
+				gra2.setHtml(Integer.parseInt(inputArr2[2]));
+				gra2.setJavascript(Integer.parseInt(inputArr2[3]));
+				int result2 = service.update(gra2);
+				JOptionPane.showMessageDialog(null, result2);
+				break;
+			case "3":
+				String result3 = service.delete(JOptionPane.showInputDialog("삭제하려는 ID?"));
+				JOptionPane.showMessageDialog(null, result3);
+				break;
+			case "4":
+				JOptionPane.showMessageDialog(null, service.list());
+				break;
 			case "5":break;
 			case "6":break;
 			case "7":break;
