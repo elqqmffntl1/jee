@@ -1,23 +1,18 @@
 package grade;
 
+import java.sql.SQLException;
 import java.util.List;
 
-public interface GradeService {
-	// 총 7개의 기본 패턴이 존재한다
+import global.CommonService;
+
+public interface GradeService extends CommonService{
+	// 총 7개의 기본 패턴이 존재
 	// exeU
-	public int insert(GradeBean gra);
-	public int update(GradeBean grade);
-	public String delete(String id);
-	// exeQ
-	public List<GradeBean> list();
-	public List<GradeBean> findByHakjum(String hakjum);
+	
+	public String insert(GradeBean grade);
+	public String update(GradeBean grade);
+	public String delete(String delete); 
 	public GradeBean findBySeq(int seq);
-	public int count();
-    // 점수입력받는 메소드
-	public void score(String[]strArr);
-	/*public abstract void jumsu(String name, int kor, int eng, int math);
-	public int tatal();
-	public int avg();
-	public String grade();
-	public String result();*/
+	public int count (String findByDate);
+	public String GradeCal(GradeBean grade);
 }

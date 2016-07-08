@@ -56,7 +56,7 @@ public class MemberDAO {
        return result;
 	}
 
-	public List<MemberBean> list() {
+	public List<?> list() {
 		String sql = "select * from member";
 		List<MemberBean> list = new ArrayList<MemberBean>();
 		try {
@@ -108,7 +108,7 @@ public class MemberDAO {
     return temp;
 	}
     // findByPK
-	public List<MemberBean> findByName(String name) {
+	public List<?> findByName(String name) {
 		String sql = "select * from member where name = '"+name+"'";
 		List<MemberBean> temp = new ArrayList<MemberBean>();
 		try {
@@ -152,5 +152,13 @@ public class MemberDAO {
     return count;
 	}
 	// count
+	public boolean login(MemberBean member) {
+		boolean loginOk = false;
+		MemberBean m = this.findById(member.getId());
+		if (m.getPw().equals(member.getPw())) {
+			loginOk = true;
+		}
+		return loginOk;
+	}
 
 }

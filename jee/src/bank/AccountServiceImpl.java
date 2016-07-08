@@ -1,59 +1,117 @@
-
 package bank;
 
-/**
- * @date   : 2016. 6. 20. 
- * @author : 한상호
- * @file   : AccountServiceImpl.java
- * @story  : 계좌 인터페이스
-*/
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class AccountServiceImpl implements AccountService {
-	// 1개설 2입금 3조회 4출금 5통장내역 6해지
-	AccountBean account;
-	@Override
-	public void openAccount(String name, String id, String pw) {
-		// 1개설
-		account = new AccountBean(name,id,pw);
+	
+	AccountDAO dao = AccountDAO.getInstance();
+	private Map<?,?> map ; 
+	private static AccountServiceImpl instance = new AccountServiceImpl();
+	
+	public static AccountServiceImpl getInstance() {
+		return instance;
 	}
-
-	@Override
-	public void deposit(int inputMoney) {
-		// 2입금
-		int money = account.getMoney() ;
-		money+=inputMoney;
-		account.setMoney(money);
+	private AccountServiceImpl() {
+	    map	= new HashMap<String,AccountMemberBean>();
 	}
-
 	@Override
-	public void findAccount() {
-		// 3조회
+	public String openAccount(String id) {
+		AccountBean acc = new AccountBean();
+		acc.setAccountNo();
+		acc.setId(id);
+		acc.setMoney(0);
+		String msg = "";
+		if (dao.insertAccount(acc)==1) {
+			msg = "계좌생성 완료";
+		} else {
+			msg = "계좌생성 실패";
+		}
 		
+		return msg;
 	}
 
 	@Override
-	public String withdraw(int output) {
-		// 4출금
-		String result = "잔액부족";
-		int money = account.getMoney();
-		if (output <= money) {
-			money -= output;
-			account.setMoney(money);
-			result = String.valueOf(account.getMoney());
+	public void deposit(String depositInfo) {
+		String[] arr = depositInfo.split(",");
+		AccountBean acc = new AccountBean();
+		acc.setAccountNo(Integer.parseInt(arr[0]));
+		int money = this.restMoney(Integer.parseInt(arr[0])) 
+				+ Integer.parseInt(arr[1]);
+		acc.setMoney(money);
+		dao.deposit(acc);
+	}
+
+	@Override
+	public String withdraw(String withdrawInfo) {
+		String result = "";
+		String[] arr = withdrawInfo.split(",");
+		AccountBean acc = new AccountBean();
+		acc.setAccountNo(Integer.parseInt(arr[0]));
+		int restMoney = this.restMoney(Integer.parseInt(arr[0]));
+		int withdrawMoney = Integer.parseInt(arr[1]);
+		if (restMoney < withdrawMoney) {
+			result = "잔액이 부족합니다";
+		} else {
+			acc.setMoney(restMoney-withdrawMoney);
+			dao.withdraw(acc);
+			result = "잔액 : "+String.valueOf(this.restMoney(Integer.parseInt(arr[0])));
+		}
+		
+		return result;
+	}
+
+	@Override
+	public String updateAccount(AccountBean acc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteAccount(String delete) {
+		String result ="";
+		if (dao.delete(delete) == 1) {
+			result ="삭제 성공";
+		}else {
+			result ="삭제 실패";
 		}
 		return result;
 	}
 
 	@Override
-	public String showAccount() {
-		// 5통장내역
-		return account.toString();
+	public List<?> list() {
+		List<?> list = dao.selectAll();
+		
+		return list;
 	}
 
 	@Override
-	public void deleteAccount() {
-		// 6해지
-		account = null;
+	public AccountBean findByAccountNo(String accNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	
+	@Override
+	public List<?> findBy(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return dao.count();
+	}
+	@Override
+	public int restMoney(int accNo) {
+		
+		return dao.selectMoney(accNo);
+	}
+	@Override
+	public Map<?, ?> map() {
+		map = new HashMap<String,AccountMemberBean>();
+		map = dao.selectMap();
+		return map;
+	}
 }

@@ -55,7 +55,7 @@ public class MemberController {
 				break;
 			case "13":
 				String findName = JOptionPane.showInputDialog("조회할 이름?");
-				JOptionPane.showMessageDialog(null, service.findByName(findName));
+				JOptionPane.showMessageDialog(null, service.findBy(findName));
 				break;
 			case "14":
 				break;

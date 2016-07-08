@@ -1,12 +1,20 @@
 package member;
 
 import java.util.List;
+import java.util.Map;
+
+import bank.AccountService;
+import bank.AccountServiceImpl;
+
+
 
 public class MemberServiceImpl implements MemberService {
 	MemberBean stu;
+	
 
 	MemberDAO dao = MemberDAO.getInstance();
-
+	AccountService accService = AccountServiceImpl.getInstance();
+	MemberBean session;
 	private static MemberServiceImpl instance = new MemberServiceImpl();  //싱글턴 패턴(보안때문에 getter만 보유한패턴)
 
 	public static MemberServiceImpl getInstance() {
@@ -72,14 +80,33 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<MemberBean> list() {
+	public List<?> list() {
 		
 		return dao.list();
 	}
 
 	@Override
-	public List<MemberBean> findByName(String findByName) {
+	public List<?> findBy(String findByName) {
 		return dao.findByName(findByName);
+	}
+
+	@Override
+	public Map<?, ?> map() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String login(MemberBean member) {
+		// 2.로그인
+		String result = "";
+			if (dao.login(member)) {
+				result = "로그인성공";
+				session = findById(member.getId());
+				accService.map();
+			} else {
+				result = "로그인실패";
+			}
+		return result;
 	}
 
 }

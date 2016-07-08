@@ -1,4 +1,7 @@
-package bank;
+/**
+ * 
+ */
+package bank2;
 
 import global.Constants;
 
@@ -9,8 +12,11 @@ import global.Constants;
  * @story  : 
 */
 public class AccountBean {
-	private int accountNo,money; // 인스턴스 변수는 초기화를 하지 않는다
-	private String name,pw,id;
+	private int accountNo; // 인스턴스 변수는 초기화를 하지 않는다
+	private String name;
+	private int money;
+	private String pw;
+	private String id;
 	
 	public AccountBean() {
 		// default constructor 기본 생성자
@@ -28,6 +34,8 @@ public class AccountBean {
 		this.id = id;
 		this.pw = pw;
 	}
+	
+	
 	
 	public String getPw() {
 		return pw;

@@ -14,31 +14,48 @@ public class GradeController {
 		GradeService service = GradeServiceImpl.getInstance();
 		while (true) {
 			switch (JOptionPane.showInputDialog(""
-					+ "1추가 2수정 3삭제 4전체조회 5학점을 포함한 시험내역 조회(SEQ) 6시퀀스조회(ID) 7응시생수(시험일자별)")) {
+					+ "1추가 2수정 3삭제 4전체조회 5학점을 포함한 시험내역 조회(SEQ) 6시퀀스조회(ID) 7응시생수(시험일자별) 0종료")) {
 			case "1":
-			    service.score(JOptionPane.showInputDialog("id,date,java,sql,html,js").split(","));
+				GradeBean bean = new GradeBean();
+				String insert = JOptionPane.showInputDialog("ID와 점수, 날짜를 입력해주세요\n"
+						+ "ID, java, sql, html, javascript, exam_date");
+				String[] insert2 = insert.split(",");
+				bean.setId(insert2[0]);
+				bean.setJava(Integer.parseInt(insert2[1]));
+				bean.setSql(Integer.parseInt(insert2[2]));
+				bean.setHtml(Integer.parseInt(insert2[3]));
+				bean.setJavascript(Integer.parseInt(insert2[4]));
+				bean.setExamDate(insert2[5]);
+				JOptionPane.showMessageDialog(null, service.insert(bean));
 				break;
 			case "2":
-				GradeBean gra2 = new GradeBean();
-				String input2 =JOptionPane.showInputDialog("점수변경 자바,SQL,HTML,자바스크립트");
-				String[] inputArr2 = input2.split(",");
-				gra2.setJava(Integer.parseInt(inputArr2[0]));
-				gra2.setSql(Integer.parseInt(inputArr2[1]));
-				gra2.setHtml(Integer.parseInt(inputArr2[2]));
-				gra2.setJavascript(Integer.parseInt(inputArr2[3]));
-				int result2 = service.update(gra2);
-				JOptionPane.showMessageDialog(null, result2);
+				GradeBean bean2 = new GradeBean();
+				String modify = JOptionPane.showInputDialog("수정하실 Seq_no 및 과목, 점수를 입력하세요");
+				String[] modify2 = modify.split(",");
+				bean2.setSeq(modify2[0]);
+				bean2.setType(modify2[1]);
+				bean2.setScore(modify2[2]);
+				JOptionPane.showMessageDialog(null, service.update(bean2));
 				break;
 			case "3":
 				String result3 = service.delete(JOptionPane.showInputDialog("삭제하려는 ID?"));
 				JOptionPane.showMessageDialog(null, result3);
 				break;
 			case "4":
-				JOptionPane.showMessageDialog(null, service.list());
+				GradeUI ui = new GradeUI();
 				break;
-			case "5":break;
-			case "6":break;
-			case "7":break;
+			case "5":
+				String findBySq = JOptionPane.showInputDialog("조회하실 Seq.no");
+				JOptionPane.showMessageDialog(null, service.findBySeq(Integer.parseInt(findBySq)));
+				break;
+			case "6":
+				String findByName = JOptionPane.showInputDialog("조회하실 ID");
+				JOptionPane.showMessageDialog(null, service.findBy(findByName));
+				break;
+			case "7":
+			String examDate = JOptionPane.showInputDialog("조회하려는 시험일자(예:2016-05");
+				JOptionPane.showMessageDialog(null, service.count(examDate)+"명");
+				break;
 			case "0":return;
 			default:
 				break;

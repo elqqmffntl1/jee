@@ -16,7 +16,7 @@ values('you','1','유관순','2014-07-01','010701-4');
 insert into member(id,pw,name,reg_date,ssn)
 values('hong2','1','홍길동','2015-07-01','020601-1');
 insert into member(id,pw,name,reg_date,ssn)
-values('hong3','1','홍길동','2015-07-01','010501-2');
+values('kim','1','김유신','2015-06-01','810611-1');
 -- READ ()
 select * from member; -- list
 select * from member where id = 'hong'; -- findByPK (primary key)
