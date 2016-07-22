@@ -7,14 +7,14 @@
 	 <h1>계좌관리</h1>
 	 <div style="width: 300px;margin: 0 auto;text-align: left;">
 	    <ol>
-	    	<li><a href="${context}/account/regist.do">개설</a></li>
-	    	<li><a href="${context}/account/deposit.do">입금</a></li>
-	    	<li><a href="${context}/account/withdraw.do">출금</a></li>
-	    	<li><a href="${context}/account/update.do">비번수정</a></li>
-	    	<li><a href="${context}/account/delete.do">해지</a></li>
-	    	<li><a href="${context}/account/list.do">목록</a></li>
-	    	<li><a href="${context}/account/search.do">조회</a></li>
-	    	<li><a href="${context}/account/count.do">통장수</a></li>
+	    	<li><a href="${context}/account.do?page=regist">개설</a></li>
+	    	<li><a href="${context}/account.do?page=deposit">입금</a></li>
+	    	<li><a href="${context}/account.do?page=withdraw">출금</a></li>
+	    	<li><a href="${context}/account.do?page=update">비번수정</a></li>
+	    	<li><a href="${context}/account.do?page=delete">해지</a></li>
+	    	<li><a href="${context}/account.do?page=list">목록</a></li>
+	    	<li><a href="${context}/account.do?page=search">조회</a></li>
+	    	<li><a href="${context}/account.do?page=count">통장수</a></li>
 	    </ol>
 	    </div>
 	    <a href="${context}/index.jsp"><img src="${img}/home.jpg" alt="home" style="width: 30px" /></a>

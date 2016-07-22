@@ -9,23 +9,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import global.DispatcherServlet;
+import global.Seperator;
+
 /**
  * Servlet implementation class GradeController
  */
-@WebServlet({"/grade/main.do","/grade/regist.do","/grade/update.do","/grade/delete.do","/grade/list.do"
-	,"/grade/count.do","/grade/search.do"})
+@WebServlet("/grade.do")
 public class GradeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String sPath = request.getServletPath();
-	String[] arr = sPath.split("/");
-	String pkg = arr[1];
-	String view = arr[2].substring(0, arr[2].indexOf("."));
-	RequestDispatcher dis = request.getRequestDispatcher("/WEB-INF/"+pkg+"/"+view+".jsp");
-	dis.forward(request, response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	Seperator.init(request, response);
+	GradeService service = GradeServiceImpl.getInstance();
+	switch (Seperator.command.getAction()) {
+	case "":break;
 
+	default:
+		break;
+	}
+	DispatcherServlet.send(request, response, Seperator.command);
+	}
 }
