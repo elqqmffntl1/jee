@@ -23,7 +23,7 @@ public class GradeController extends HttpServlet {
 	Seperator.init(request, response);
 	GradeService service = GradeServiceImpl.getInstance();
 	switch (Seperator.command.getAction()) {
-	case "":break;
+	case "move":break;
 
 	default:
 		break;

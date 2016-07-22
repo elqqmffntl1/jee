@@ -23,7 +23,7 @@ public class AccountController extends HttpServlet {
 		Seperator.init(request, response);
 		AccountService service = AccountServiceImpl.getInstance();
 		switch (Seperator.command.getAction()) {
-		case "":break;
+		case "move":break;
 
 		default:
 			break;

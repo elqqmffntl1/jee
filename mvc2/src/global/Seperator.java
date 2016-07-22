@@ -20,7 +20,6 @@ public class Seperator {
 		String directory = temp.substring(0, temp.indexOf("."));
 		System.out.println("디렉토리"+directory);
 		System.out.println("=====================");
-		
 		Enumeration<String> en = request.getParameterNames();
 		List<String> list = new ArrayList<String>();
 		while (en.hasMoreElements()) {

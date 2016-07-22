@@ -10,7 +10,7 @@
 <body>
 <div class="box">
      <h1>인원수 페이지</h1>
-      <a href="${context}/member/result/count_result.jsp""><h1>인원수 체크하기</h1></a>
+      <h1>현재 인원은 ${all}명 입니다</h1>
       <a href="${context}/member/main.jsp"><img src="${img}/member.jpg" alt="member" style="width: 30px" /></a>
       <a href="${context}/index.jsp"><img src="${img}/home.jpg" alt="home" style="width: 30px" /></a>
       </div>

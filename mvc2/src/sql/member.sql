@@ -34,6 +34,6 @@ update member set ssn = '580301-2' where id = 'k';
 update member set profile_img = id || '.jpg' where profile_img IS NULL;
 
 -- DELETE
-delete from member where id = 'super';
+delete from member where id = 'hanjo';
 
 
