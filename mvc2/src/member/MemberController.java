@@ -27,7 +27,7 @@ public class MemberController extends HttpServlet {
 			member.setId(request.getParameter("id"));
 			member.setPw(request.getParameter("pw"));
 			String name = service.login(member);
-			if (name.equals("")) {
+			if (name.equals("fail")) {
 				Seperator.command.setPage("login");
 				Seperator.command.setView();
 			} else {

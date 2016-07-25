@@ -98,7 +98,7 @@ public class MemberServiceImpl implements MemberService {
 				result = session.getName();
 				accService.map();
 			} else {
-				result = "";
+				result = "fail";
 			}
 		return result;
 	}
