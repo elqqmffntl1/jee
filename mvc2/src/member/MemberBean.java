@@ -14,9 +14,26 @@ import javax.swing.JOptionPane;
 */
 public class MemberBean implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String id,pw,name,regDate,gender,ssn,profileImg,email; 
+	private String id,pw,name,regDate,gender,ssn,profileImg,email,phone; 
 	private int birth;
 	
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+/*	public void setGender(String gender) {
+		this.gender = gender;
+	}
+*/
+/*	public void setBirth(int birth) {
+		this.birth = birth;
+	}*/
+
 	public String getEmail() {
 		return email;
 	}
@@ -27,12 +44,13 @@ public class MemberBean implements Serializable{
 
 	public MemberBean() {}
 
-	public MemberBean(String id,String pw,String name, String email, String ssn, String profileImg) {
+	public MemberBean(String id,String pw,String name, String gender, String email, String ssn, String profileImg) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
 		this.ssn = ssn;
 		this.email = email;
+		this.gender = gender;
 		this.profileImg = profileImg;
 		
 		String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
@@ -43,7 +61,7 @@ public class MemberBean implements Serializable{
 		int genderResult = (Integer.parseInt(ssnArr[1]));
 		int ageResult2 = (Integer.parseInt(nowArr[0]));
 		int ageResult0 = 0;
-		switch (genderResult%2) {
+		switch (genderResult) {
 		case 1: case 5: 
 			this.gender="남"; 
 			ageResult0 = ageResult2 - 1900-(ageResult1/10000);
@@ -119,12 +137,14 @@ public class MemberBean implements Serializable{
 		int ssnGender = (Integer.parseInt(ssnArr[1]));
 		int thisYear = (Integer.parseInt(nowArr[0]));
 		int age = 0;
+		this.ssn = ssn;
 		switch (ssnGender) {
 		case 1: case 5: 
 			this.gender="남"; 
 			System.out.println("올해:"+thisYear);
-		//	age = ageResult2 - 1900-(this/10000);
-		//  나이를 구하려고 했으나 일단 보류	
+			System.out.println("생년월일:"+ssnBirth);
+		//	age = ageResult2 - (1900-(this/10000));
+		//  나이를 구하려고 했으나 일단 보류
 			this.birth = ssnBirth;
 			break;
 		case 3: case 7:
@@ -147,13 +167,12 @@ public class MemberBean implements Serializable{
 		return ssn;
 	}
 	public void setSsn(String ssn) {
+		this.birth = Integer.parseInt(ssn.split("-")[0]);
+		this.gender = ((Integer.parseInt(ssn.split("-")[1])+2)%2==0) ? "여" : "남";
 		this.ssn = ssn;
 	}
-	
 	public String toString() {
 		return "학생 [아이디=" + id + ", 비번=" + pw+ ", 이메일=" + email  + ", 이름=" + name + ", 등록일=" + regDate + ", 성별=" + gender
 				+ ", 주민번호=" + ssn + ", 나이=" + birth + "]";
 	}
-	
-
 }

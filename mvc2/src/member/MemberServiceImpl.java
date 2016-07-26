@@ -5,13 +5,17 @@ import java.util.Map;
 
 import bank.AccountService;
 import bank.AccountServiceImpl;
+import subject.SubjectBean;
+import subject.SubjectDAO;
+import subject.SubjectMember;
 
 
 
 public class MemberServiceImpl implements MemberService {
-	MemberDAO dao = MemberDAO.getInstance();
-	AccountService accService = AccountServiceImpl.getInstance();
-	MemberBean session;
+	private MemberDAO dao = MemberDAO.getInstance();
+	private SubjectDAO subjDao = SubjectDAO.getInstance();
+	private AccountService accService = AccountServiceImpl.getInstance();
+	private MemberBean session;
 	private static MemberServiceImpl instance = new MemberServiceImpl();  //싱글턴 패턴(보안때문에 getter만 보유한패턴)
 
 	public static MemberServiceImpl getInstance() {
@@ -25,12 +29,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String regist(MemberBean mem) {
 		String msg = "";
-		
-		int result = dao.insert(mem);
-		if (result==1) {
-			msg = "회원가입 축하";
-		} else {
-            msg = "";
+		MemberBean temp = this.findById(mem.getId());
+		if (temp == null) {
+			System.out.println(mem.getId()+"은(는) 사용 가능한 ID 입니다.");
+			int result = dao.insert(mem);
+			if (result==1) {
+				msg = "success";
+			} else {
+	            msg = "fail";
+			}
+		}else{
+			System.out.println(mem.getId()+"은(는) 사용 불가능한 ID 입니다.");
+			msg = "fail";
 		}
 		return msg;
 	}
@@ -46,7 +56,9 @@ public class MemberServiceImpl implements MemberService {
 		// TODO 3.수정
 		int result = dao.update(mem);
 		if (result == 1) {
-			session = this.findById(mem.getId());
+			System.out.println("서비스 수정결과 성공");
+		}else{
+			System.out.println("서비스 수정결과 실패");
 		}
 	}
 
@@ -80,8 +92,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<?> findBy(String findByName) {
-		return dao.findByName(findByName);
+	public List<?> findBy(String keyword) {
+		return dao.findByName(keyword);
 	}
 
 	@Override
@@ -90,17 +102,32 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 	@Override
-	public String login(MemberBean member) {
+	public SubjectMember login(MemberBean member) {
+		SubjectMember sm = new SubjectMember();
+		SubjectBean sb = new SubjectBean();
 		// 2.로그인
-		String result = "";
 			if (dao.login(member)) {
 				session = findById(member.getId());
-				result = session.getName();
 				accService.map();
+				sb = subjDao.findById(member.getId());
+				sm.setEmail(session.getEmail());
+				sm.setId(session.getId());
+				sm.setImg(session.getProfileImg());
+				sm.setName(session.getName());
+				sm.setPhone(session.getPhone());
+				sm.setPw(session.getPw());
+				sm.setReg(session.getRegDate());
+				sm.setSsn(session.getSsn());
+				sm.setGender(session.getGender());
+				sm.setBirth(String.valueOf(session.getBirth()));
+				sm.setMajor(sb.getMajor());
+				sm.setSubjects(sb.getSubjects());
+				System.out.println(sm);
 			} else {
-				result = "fail";
+				sm.setId("fail");
 			}
-		return result;
+		System.out.println("서비스로그인결과?"+sm.getId());
+		return sm;
 	}
 
 	@Override

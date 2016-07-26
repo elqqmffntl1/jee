@@ -29,6 +29,8 @@ public class Seperator {
 		
 		String action = list.contains("action")?request.getParameter("action"):"move";
 		String page = list.contains("page")?request.getParameter("page"):"main";
+		String pageNo = list.contains("pageNo")?request.getParameter("pageNo"):"1";
+		String keyword = list.contains("keyword")?request.getParameter("keyword"):"lostChild";
 		
 		System.out.println("디렉토리:"+directory);
 		System.out.println("action:"+action);

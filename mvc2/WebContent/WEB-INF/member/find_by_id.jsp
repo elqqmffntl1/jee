@@ -1,23 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="${css}/global.css" />
 <link rel="stylesheet" href="${css}/member.css" />
-</head>
-<body>
-<div class="box">
-   <h1>검색(ID)페이지</h1>
-      	<form action="${context}/member/result/find_by_id_result.jsp" method="post">
-		<span class="meta">검색 할 I D를 입력하세요.</span><input type="text" name="id" /><br />
-		<br /><br /><br />	
-		<input type="submit" value="검색하기" />
-		<input type="reset" value="취소" />
-	</form>
-    <a href="${context}/member/main.jsp"><img src="${img}/member.jpg" alt="member" style="width: 30px" /></a>
-    <a href="${context}/index.jsp"><img src="${img}/home.jpg" alt="home" style="width: 30px" /></a>
-    </div>
-</body>
-</html>
+<jsp:include page="../global/top.jsp"/>
+<jsp:include page="../global/header.jsp"/>
+<jsp:include page="../global/navi.jsp"/>
+	<div class="box">
+		<h1>검색된 회원 정보</h1>
+			<table id="member_detail">
+			<tr>
+				<td rowspan="4" style="width: 30%">
+				<img src="${img}/member/${member.profileImg}" alt="mak.com" width="150" height="200">
+				</td>
+				<td style="width: 20%" class="font_bold bg_color_yellow">ID</td>
+				<td style="width: 40%">${member.id}</td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">이 름</td>
+				<td>${member.name}</td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">성 별</td>
+				<td>${member.gender}</td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">이메일</td>
+				<td>${member.email}</td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">생년월일</td>
+				<td colspan="2">${member.birth}</td>
+			</tr>
+			<tr>
+				<td class="font_bold bg_color_yellow">등록일</td>
+				<td colspan="2">${member.regDate}</td>
+			</tr>
+		</table>
+		<p>
+		<a href="${context}/member.do"><img src="${img}/member.jpg" alt="member" style="width: 30px" /></a>
+		</p>
+		<a href="${context}/global.do"><img src="${img}/home.jpg" alt="home" style="width: 30px" /></a>
+	</div>
+<jsp:include page="../global/footer.jsp"/>
+<jsp:include page="../global/end.jsp"/>

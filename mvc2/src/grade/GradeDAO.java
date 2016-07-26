@@ -37,6 +37,7 @@ public class GradeDAO {
 		public static GradeDAO getInstance() {
 			return instance;
 		}
+		
 	public int insert(GradeBean grade) {
 		int result = 0;
 		String sql = "insert into grade(seq, grade, java, sql, html, javascript, id, exam_date)"

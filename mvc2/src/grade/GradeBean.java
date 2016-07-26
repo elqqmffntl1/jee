@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class GradeBean implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String id, grade,seq,examDate,type,score;
+	private String id, grade,seq,examDate,type,score,major;
 	private int java, sql, html, javascript;
 	
 	public String getType() {
@@ -13,6 +13,14 @@ public class GradeBean implements Serializable{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
 	}
 
 	public String getScore() {
